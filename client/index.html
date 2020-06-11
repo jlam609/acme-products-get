@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
+    <style> 
+     #app{
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    }
+    .header{
+    text-align: center;
+    padding:20px;
+    }
+    .product{
+    display: flex;
+    flex-direction: column;
+    }
+    .card{
+    border:blue solid 1px;
+    border-radius: 15px;
+    background-color: aqua;
+    list-style: none;
+    padding:20px;
+    width:400px;
+    font-weight: bold;
+    font-family: sans-serif;
+    }
+    .company{
+    display:flex;
+    flex-direction: column;
+    }
+    </style>
+  </head>
+  <body>
+    <div id='root'></div>
+    <script type='text/babel'>
+    class App extends React.Component{
+        state = {
+            products:[],
+            companies:[],
+        }
+        componentDidMount = () => {
+            const products = axios.get('/api/products')
+            const companies = axios.get('/api/companies')
+            Promise.all([products,companies])
+            .then(([products,companies]) => {
+                this.setState({
+                    products:products.data,
+                    companies:companies.data
+                })
+            })
+        }
+        render(){
+            const {products, companies} = this.state
+            return(
+                <div>
+                <h1 className = {'header'}>My Products and Companies</h1>
+                <div id = {'app'}> 
+                    <div className = {'product'}>
+                    {products.map(product => {
+                        return (
+                            <ul key = {product.name} className = {'card'}> {product.name}
+                            <li className = {'card-body'}> {product.description}</li>
+                            <li> {product.suggestedPrice} </li>
+                            </ul>
+                        )
+                    })}
+                    </div>
+                    <div className = {'company'}>
+                    {companies.map(company => {
+                        return (
+                            <ul key = {company.name} className = {'card'}> {company.name}
+                            <li> {company.catchPhrase}</li>
+                            <li> {company.state} </li>
+                            </ul>
+                        )
+                    })}
+                    </div>
+                </div>
+                </div>
+            )
+        }
+    }
+      ReactDOM.render(<App />, document.querySelector('#root'), () => console.log('rendered'));
+    </script>
+  </body>
+</html>

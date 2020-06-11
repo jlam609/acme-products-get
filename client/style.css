@@ -1,0 +1,20 @@
+#root{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+.product{
+    display: flex;
+    flex-direction: column;
+}
+.card{
+    border:blue solid 1px;
+    border-radius: 15px;
+    background-color: aqua;
+    list-style: none;
+}
+.company{
+    display:flex;
+    flex-direction: column;
+}

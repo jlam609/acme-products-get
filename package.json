@@ -1,0 +1,23 @@
+{
+  "name": "acme-products-get",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlam609/acme-products-get.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlam609/acme-products-get/issues"
+  },
+  "homepage": "https://github.com/jlam609/acme-products-get#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
